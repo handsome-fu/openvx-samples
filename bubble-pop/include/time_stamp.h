@@ -60,9 +60,13 @@ void inline AddTimeStamp(char *pos)
 void PrintTimeStamp()
 {
 	printf("=======================================\r\n");
-	for(int i = 0; i < g_timeStampIdx; ++i) {
+	printf("%-32s\t", g_timestamps[0].postion);
+	printf("%3ld s: %3ld ms\r\n", g_timestamps[0].timeS, g_timestamps[0].timeNS / 1000000);
+	
+	for(int i = 1; i < g_timeStampIdx; ++i) {
 		printf("%-32s\t", g_timestamps[i].postion);
-		printf("%3ld s: %3ld ms\r\n", g_timestamps[i].timeS, g_timestamps[i].timeNS / 1000000);
+		printf("%3ld s: %3ld ms\t", g_timestamps[i].timeS, g_timestamps[i].timeNS / 1000000);
+		printf("TimeUsage: %3ld ms\r\n", (g_timestamps[i].timeS - g_timestamps[i - 1].timeS) * 1000 + (g_timestamps[i].timeNS - g_timestamps[i - 1].timeNS) / 1000000);
 	}
 	printf("=======================================\r\n");
 	g_timeStampIdx = 0;

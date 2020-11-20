@@ -219,9 +219,11 @@ int main(int argc, char **argv)
         printf("Unable to open camera\n");
         return 0;
     }
-    for(int i = 0; i < 20; ++i)
+    for(int i = 0; i < 5; ++i)
     {
+        AddTimeStamp("Begin");
         cap >> input;
+        AddTimeStamp("Get img");
         resize(input, input, Size(width, height));
         cvtColor(input, input_rgb, COLOR_BGR2RGB);
         if(waitKey(30) >= 0) break;
@@ -248,6 +250,7 @@ int main(int argc, char **argv)
         imshow( "VX POP - LIVE", mat );
         if(waitKey(30) >= 0) break;
         ERROR_CHECK_STATUS( vxUnmapImagePatch( output_pop_image, map_id ) );
+        AddTimeStamp("End");
         PrintTimeStamp();
     }
 
