@@ -22,7 +22,7 @@ THE SOFTWARE.
 
 #include"internal_publishKernels.h"
 #include<string>
-
+#include <time_stamp.h>
 int poppedDonuts = 0;
 int globalDonutFlag = 0;
 Mat globalDonutRefImage;
@@ -127,10 +127,12 @@ donutNode *PopDonuts = NULL;
 /************************************************************************************************************
 Draw Bubbles
 *************************************************************************************************************/
+
 int draw_pop_donuts(int width, int height, Mat *Image)
 {
 	static int count = 0;
 
+	AddTimeStamp("draw_pop_donuts begin");
 	int randx = rand() % (width + 1);
 	AMD_donut_pop new_element = AMD_donut_pop(randx, 0, 20, 20);
 
@@ -139,7 +141,7 @@ int draw_pop_donuts(int width, int height, Mat *Image)
 	temp->next = NULL;
 	PopDonuts = donut_insert(PopDonuts, temp);
 	count++;
-
+	AddTimeStamp("generate pop");
 	donutNode *_donuts;
 	_donuts = PopDonuts;
 	int K = 0;
@@ -162,7 +164,7 @@ int draw_pop_donuts(int width, int height, Mat *Image)
 		if (flag == 0)
 			_donuts = _donuts->next;
 	}
-
+	AddTimeStamp("after update popPos");
 	return 0;
 
 }

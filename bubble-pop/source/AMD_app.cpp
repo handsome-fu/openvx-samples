@@ -3,6 +3,7 @@
 #include "opencv2/opencv.hpp"
 #include "vx_ext_pop.h"
 #include <string>
+#include <time_stamp.h>
 
 using namespace cv;
 using namespace std;
@@ -218,7 +219,7 @@ int main(int argc, char **argv)
         printf("Unable to open camera\n");
         return 0;
     }
-    for(;;)
+    for(int i = 0; i < 20; ++i)
     {
         cap >> input;
         resize(input, input, Size(width, height));
@@ -247,6 +248,7 @@ int main(int argc, char **argv)
         imshow( "VX POP - LIVE", mat );
         if(waitKey(30) >= 0) break;
         ERROR_CHECK_STATUS( vxUnmapImagePatch( output_pop_image, map_id ) );
+        PrintTimeStamp();
     }
 
     // release objects
