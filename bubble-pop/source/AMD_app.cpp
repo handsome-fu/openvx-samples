@@ -213,7 +213,7 @@ int main(int argc, char **argv)
     
     Mat input, input_rgb;
     cv::namedWindow("VX POP - LIVE", cv::WINDOW_GUI_EXPANDED);
-    VideoCapture cap(0);
+    VideoCapture cap(1);
     if (!cap.isOpened()) {
         printf("Unable to open camera\n");
         return 0;
